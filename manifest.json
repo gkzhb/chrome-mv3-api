@@ -1,0 +1,13 @@
+{
+  "name": "Manifest V3 API Extension",
+  "description": "Provide Manifest V3 API for other extensions",
+  "version": "0.1",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [ "storage", "tabGroups", "activeTab", "scripting" ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
