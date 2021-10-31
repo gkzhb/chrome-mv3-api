@@ -11,12 +11,12 @@ chrome.runtime.onMessageExternal.addListener(
                 "from a content script:" + sender.tab.url :
                 "from the extension");
     let resp;
-    switch (req.type) {
-      case 'tabGroups':
-        resp = await chrome.tabGroups[req.func](...req.params);
-        console.log(`tabGroups ${req.func}`, req.params, resp);
-        break;
-      default:
+    console.log(chrome, req.type in chrome, chrome[req.type], req.func in chrome[req.type]);
+    if (req.type in chrome && req.func in chrome[req.type]) {
+      console.log('req exec', req.type, req.func, req.params);
+      resp = await chrome[req.type][req.func](...req.params);
+    } else {
+      console.log('req fail', req.type, req.func, req.params);
     }
     sendResp(resp);
   }
